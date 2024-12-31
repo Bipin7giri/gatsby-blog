@@ -4,6 +4,7 @@ import { Link, graphql } from "gatsby"
 import Bio from "../components/bio"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
+import Share from "../components/Share"
 
 const BlogPostTemplate = ({
   data: { previous, next, site, markdownRemark: post },
@@ -12,20 +13,38 @@ const BlogPostTemplate = ({
   const siteTitle = site.siteMetadata?.title || `Title`
 
   return (
-    <Layout location={location} title={siteTitle}>
+    <div className="md:my-[24px] mt-2 md:w-[800px] md:px-0 px-[24px]  w-auto mx-auto">
       <article
         className="blog-post"
         itemScope
         itemType="http://schema.org/Article"
       >
         <header>
-          <h1 itemProp="headline">{post.frontmatter.title}</h1>
-          <p>{post.frontmatter.date}</p>
+          <h1
+            itemProp="headline"
+            className="text-gray-800 font-manrope text-start md:text-[36px] text-[28px] pt-[32px] font-medium"
+          >
+            {post.frontmatter.title}
+          </h1>
+          <div className="border-b-[1px] border-gray-200 pb-4">
+            <Share />
+
+            <div className=" mt-4 text-sm text-gray-500 font-medium">
+              Posted: {post.frontmatter.date}
+            </div>
+            <div className=" mt-2 text-sm text-primary font-medium">
+              Phalano Job
+            </div>
+            <div></div>
+          </div>
         </header>
-        <section
-          dangerouslySetInnerHTML={{ __html: post.html }}
-          itemProp="articleBody"
-        />
+        <article className=" flex items-start mt-6">
+          <div
+            className="text-[18px] font-display leading-7"
+            dangerouslySetInnerHTML={{ __html: post.html }}
+          />
+        </article>
+
         <hr />
         {/* <footer>
           <Bio />
@@ -57,7 +76,7 @@ const BlogPostTemplate = ({
           </li>
         </ul>
       </nav>
-    </Layout>
+    </div>
   )
 }
 
